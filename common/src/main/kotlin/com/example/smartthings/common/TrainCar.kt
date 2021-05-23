@@ -1,6 +1,6 @@
 package com.example.smartthings.common
 
-class TrainCar (
+data class TrainCar (
 	/**Database unique identifier, null until assigned by the database.*/
 	var id: Long? = null,
 	/**Human-readable unique identifier. Must be uppercase.*/

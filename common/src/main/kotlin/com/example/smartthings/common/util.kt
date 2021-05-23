@@ -6,7 +6,6 @@ import org.apache.hc.core5.http.io.entity.EntityUtils
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity
-import java.util.*
 import kotlin.reflect.KClass
 
 //general utils
@@ -27,9 +26,9 @@ fun <K,V> HashMap<K,V>.putUnique(key: K, value: V) {
 	}
 }
 
-fun <T : AutoCloseable> T.use(block: (T) -> Unit) {
+fun <T : AutoCloseable, R> T.use(block: (T) -> R) : R {
 	try {
-		block(this)
+		return block(this)
 	} finally {
 		this.close()
 	}
@@ -64,14 +63,14 @@ inline fun <reified T> CloseableHttpResponse.parseAndClose() : T? {
 
 
 /**Returns a random item in the array. The list must not be empty.*/
-fun <T> Random.nextEntry(array: Array<T>): T {
+fun <T> kotlin.random.Random.nextEntry(array: Array<T>): T {
 	if(array.isEmpty())
 		throw IllegalArgumentException("array cannot be empty")
 	return array[this.nextInt(array.size)]
 }
 
 /**Returns a random item in the list. The list must not be empty.*/
-fun <T> Random.nextEntry(list: List<T>): T {
+fun <T> kotlin.random.Random.nextEntry(list: List<T>): T {
 	if(list.isEmpty())
 		throw IllegalArgumentException("list cannot be empty")
 	return list[this.nextInt(list.size)]
