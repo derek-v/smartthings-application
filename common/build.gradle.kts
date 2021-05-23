@@ -24,7 +24,8 @@ dependencies {
 
 	implementation("org.springframework.boot:spring-boot-starter-web")
 
-//	testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.2")
-//	testImplementation("org.junit.jupiter:junit-jupiter-engine:5.7.2")
+	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+	implementation("org.apache.httpcomponents.client5:httpclient5:5.1")
+
 	testImplementation("junit:junit:4.12")
 }

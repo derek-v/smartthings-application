@@ -7,16 +7,17 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.ResponseBody
 
+/**Basic APIs for information about train cars. These APIs do not involve the other service (location).*/
 @Controller
 @RequestMapping("cars")
-class TraincarResource {
+class TrainCarResource {
 	@GetMapping
 	@ResponseBody
-	fun getAll() = TrainCarService.getAll()
+	fun getAll() = TrainCarRepository.getAll()
 
 	@GetMapping("id/{id}")
-	fun getById(@PathVariable id: Long) = TrainCarService.getById(id).asResponse()
+	fun getById(@PathVariable id: Long) = TrainCarRepository.getById(id).asResponse()
 
 	@GetMapping("{code}")
-	fun getByCode(@PathVariable code: String) = TrainCarService.getByCode(code.uppercase()).asResponse()
+	fun getByCode(@PathVariable code: String) = TrainCarRepository.getByCode(code.uppercase()).asResponse()
 }
