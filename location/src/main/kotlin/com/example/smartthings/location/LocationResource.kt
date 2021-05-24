@@ -1,5 +1,6 @@
 package com.example.smartthings.location
 
+import com.example.smartthings.common.NotFoundException
 import com.example.smartthings.common.RailLocationNoId
 import com.example.smartthings.common.asResponse
 import org.springframework.http.ResponseEntity
@@ -19,6 +20,16 @@ class LocationResource {
 
 	@GetMapping("id/{id}")
 	fun getById(@PathVariable id: Long) = locationRepo.getById(id).asResponse()
+
+	@PutMapping("id/{id}")
+	fun updateById(@PathVariable id: Long, @RequestBody body: RailLocationNoId): ResponseEntity<*> {
+		try {
+			locationRepo.update(body.withId(id))
+			return ResponseEntity.ok(null)
+		} catch(e: NotFoundException) {
+			return ResponseEntity.notFound().build<Any>()
+		}
+	}
 
 	@DeleteMapping("id/{id}")
 	fun deleteById(@PathVariable id: Long): ResponseEntity<*> {

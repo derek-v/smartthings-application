@@ -1,11 +1,10 @@
 package com.example.smartthings.traincar
 
+import com.example.smartthings.common.TrainCar
+import com.example.smartthings.common.TrainCarNoId
 import com.example.smartthings.common.asResponse
 import org.springframework.stereotype.Controller
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.ResponseBody
+import org.springframework.web.bind.annotation.*
 
 /**Basic APIs for information about train cars. These APIs do not involve the other service (location).*/
 @Controller
@@ -13,11 +12,25 @@ import org.springframework.web.bind.annotation.ResponseBody
 class TrainCarResource {
 	@GetMapping
 	@ResponseBody
-	fun getAll() = TrainCarRepository.getAll()
+	fun getAll() = trainCarRepo.getAll()
+
+	@PostMapping
+	@ResponseBody
+	fun create(@RequestBody car: TrainCarNoId) = trainCarRepo.create(car)
 
 	@GetMapping("id/{id}")
-	fun getById(@PathVariable id: Long) = TrainCarRepository.getById(id).asResponse()
+	fun getById(@PathVariable id: Long) = trainCarRepo.getById(id).asResponse()
+
+	@DeleteMapping("id/{id}")
+	fun deleteById(@PathVariable id: Long) {
+		trainCarRepo.deleteById(id)
+	}
 
 	@GetMapping("{code}")
-	fun getByCode(@PathVariable code: String) = TrainCarRepository.getByCode(code.uppercase()).asResponse()
+	fun getByCode(@PathVariable code: String) = trainCarRepo.getByCode(code.uppercase()).asResponse()
+
+	@DeleteMapping("{code}")
+	fun deleteByCode(@PathVariable code: String) {
+		trainCarRepo.deleteByCode(code)
+	}
 }

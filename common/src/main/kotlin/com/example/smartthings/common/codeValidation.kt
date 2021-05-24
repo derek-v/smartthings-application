@@ -13,3 +13,18 @@ fun requireValidLocationCode(code: String) {
 	if(!isValidLocationCode(code))
 		throw IllegalArgumentException("Invalid location code: $code")
 }
+
+
+
+
+/**Regex for train car codes, which consist of uppercase letters, then a dash, then numbers.*/
+val carCodeRegex = Pattern.compile("^[A-Z]+-[0-9]+$")
+
+/**Returns whether the string matches the regex for a valid train car code.*/
+fun isValidCarCode(code: String) = carCodeRegex.matcher(code).find()
+
+/**Throws an exception if the string does not match the regex for a valid train car code.*/
+fun requireValidCarCode(code: String) {
+	if(!isValidCarCode(code))
+		throw IllegalArgumentException("Invalid car code: $code")
+}

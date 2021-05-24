@@ -13,4 +13,6 @@ data class RailLocation (
 	init {
 		requireValidLocationCode(code)
 	}
+
+	fun withoutId() = RailLocationNoId(code, name, description)
 }

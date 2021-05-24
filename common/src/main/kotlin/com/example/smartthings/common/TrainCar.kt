@@ -2,7 +2,7 @@ package com.example.smartthings.common
 
 data class TrainCar (
 	/**Database unique identifier, null until assigned by the database.*/
-	var id: Long? = null,
+	var id: Long,
 	/**Human-readable unique identifier. Must be uppercase.*/
 	var code: String,
 	/**Where the car is located, if known.*/

@@ -8,5 +8,6 @@ class TrainCarSpringApp
 
 
 fun main(args: Array<String>) {
+	trainCarRepo = InMemoryTrainCarRepository
 	SpringApplication.run(TrainCarSpringApp::class.java, *args)
 }

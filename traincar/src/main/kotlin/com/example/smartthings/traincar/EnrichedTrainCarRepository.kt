@@ -6,10 +6,11 @@ import com.example.smartthings.common.TrainCar
 import com.example.smartthings.common.use
 
 
+/**Loads information about train cars from this service, and enriches it with information about locations from the other service.*/
 object EnrichedTrainCarRepository {
 
 	fun getAll(): List<EnrichedTrainCar> {
-		val cars = TrainCarRepository.getAll()
+		val cars = trainCarRepo.getAll()
 		val out = ArrayList<EnrichedTrainCar>(cars.size)
 
 		val locationIds = HashSet<Long>()
@@ -35,7 +36,7 @@ object EnrichedTrainCarRepository {
 		}
 	}
 
-	fun getById(carId: Long): EnrichedTrainCar? = enrich(TrainCarRepository.getById(carId))
+	fun getById(carId: Long): EnrichedTrainCar? = enrich(trainCarRepo.getById(carId))
 
-	fun getByCode(code: String): EnrichedTrainCar? = enrich(TrainCarRepository.getByCode(code))
+	fun getByCode(code: String): EnrichedTrainCar? = enrich(trainCarRepo.getByCode(code))
 }

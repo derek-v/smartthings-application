@@ -4,6 +4,7 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import org.apache.hc.client5.http.classic.methods.HttpDelete
 import org.apache.hc.client5.http.classic.methods.HttpGet
 import org.apache.hc.client5.http.classic.methods.HttpPost
+import org.apache.hc.client5.http.classic.methods.HttpPut
 import org.apache.hc.client5.http.impl.classic.HttpClients
 import org.apache.hc.core5.http.ContentType
 import org.apache.hc.core5.http.io.entity.StringEntity
@@ -12,7 +13,7 @@ private val log = LocationClient::class.logger()
 
 /**Connects to the location service and executes requests. Not thread-safe.*/
 class LocationClient : AutoCloseable {
-	/**Where the location service is (excluding a trailing slash), hardcoded for now.*/
+	/**Where the service is (with no trailing slash), hardcoded for now.*/
 	val host = "http://localhost:8081"
 	private val client = HttpClients.createDefault()
 
@@ -69,6 +70,14 @@ class LocationClient : AutoCloseable {
 		return client.execute(request).use {response ->
 			requireSuccess(response)
 			jsonMapper.readValue<RailLocation>(response.entity.content)
+		}
+	}
+
+	fun updateLocation(location: RailLocation) {
+		val request = HttpPut("$host/locations/id/${location.id}")
+		request.entity = StringEntity(jsonMapper.writeValueAsString(location.withoutId()), ContentType.APPLICATION_JSON)
+		client.execute(request).use {response ->
+			requireSuccess(response)
 		}
 	}
 
