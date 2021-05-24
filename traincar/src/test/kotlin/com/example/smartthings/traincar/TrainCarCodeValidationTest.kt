@@ -33,4 +33,12 @@ class TrainCarCodeValidationTest {
 	@Test fun testBadCharacter() {
 		assertEquals(false, isValidCarCode("X~2"))
 	}
+
+	@Test fun testPrefix() {
+		assertEquals(false, isValidCarCode("*A-1"))
+	}
+
+	@Test fun testSuffix() {
+		assertEquals(false, isValidCarCode("A-1*"))
+	}
 }

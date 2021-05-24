@@ -32,7 +32,8 @@ object EnrichedTrainCarRepository {
 		if(car == null)
 			return null
 		return LocationClient().use {client ->
-			EnrichedTrainCar(car, client.getLocationById(car.locationId))
+			val location = if(car.locationId == null) null else client.getLocationById(car.locationId!!)
+			EnrichedTrainCar(car, location)
 		}
 	}
 

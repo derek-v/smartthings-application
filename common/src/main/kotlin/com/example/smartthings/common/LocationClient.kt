@@ -27,21 +27,16 @@ class LocationClient : AutoCloseable {
 		}
 	}
 
-	/**Asks the location service for information about this location. Returns null if the ID is null, or if the location doesn't exist.*/
-	fun getLocationById(id: Long?): RailLocation? {
-		if(id == null)
-			return null
-		val request = HttpGet("$host/locations/id/$id")
-		val result: RailLocation? = client.execute(request).parseAndClose()
-		log.debug("For location ID {}, found {}.", id, result)
-		return result
+	/**Asks the location service for information about this location. Returns null if the location doesn't exist.*/
+	fun getLocationById(id: Long): RailLocation? {
+		return client.execute(HttpGet("$host/locations/id/$id")).parseAndClose()
 	}
 
 
 	/**Asks the location service for information about all provided location IDs.
 	 * Returns a map containing every location we found, excluding location IDs for which the service returned 404.*/
 	fun getLocationsByIds(ids: Set<Long>): Map<Long, RailLocation> {
-		log.debug("Looking up {} locations.", ids.size)
+		log.debug("Looking up {} locations by ID.", ids.size)
 		val out = HashMap<Long, RailLocation>(ids.size)
 		for(id in ids) {
 			val location = getLocationById(id)
@@ -49,18 +44,14 @@ class LocationClient : AutoCloseable {
 				out[id] = location
 		}
 
-		log.debug("Found {} of {} locations.", out.size, ids.size)
+		log.debug("Found {} of {} locations by ID.", out.size, ids.size)
 		return out
 	}
 
-	/**Asks the location service for information about this location. Returns null if the code is null, or if the location doesn't exist.*/
-	fun getLocationByCode(code: String?): RailLocation? {
-		if(code == null)
-			return null
+	/**Asks the location service for information about this location. Returns null if the location doesn't exist.*/
+	fun getLocationByCode(code: String): RailLocation? {
 		val request = HttpGet("$host/locations/$code")
-		val result: RailLocation? = client.execute(request).parseAndClose()
-		log.debug("For location code {}, found {}.", code, result)
-		return result
+		return client.execute(request).parseAndClose()
 	}
 
 

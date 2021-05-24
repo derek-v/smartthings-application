@@ -25,4 +25,12 @@ class LocationCodeValidationTest {
 	@Test fun testPunctuation() {
 		assertEquals(false, isValidLocationCode("AB-C"))
 	}
+
+	@Test fun testPrefix() {
+		assertEquals(false, isValidLocationCode("*A"))
+	}
+
+	@Test fun testSuffix() {
+		assertEquals(false, isValidLocationCode("A*"))
+	}
 }

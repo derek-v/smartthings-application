@@ -72,4 +72,11 @@ class LocationTest {
 			assertEquals(null, client.getLocationByCode(b.code))
 		}
 	}
+
+
+	@Test(expected = Exception::class) fun testUpdateNonexistent() {
+		LocationClient().use {client ->
+			client.updateLocation(RailLocation(1234, "NONE", "nonexistent"))
+		}
+	}
 }

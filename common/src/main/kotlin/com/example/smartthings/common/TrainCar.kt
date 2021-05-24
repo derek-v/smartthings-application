@@ -14,6 +14,8 @@ data class TrainCar (
 		if(code.uppercase() != code)
 			throw IllegalArgumentException("Code must be uppercase: $code")
 	}
+
+	fun withoutId() = TrainCarNoId(code, locationId, type, massKg)
 }
 
 

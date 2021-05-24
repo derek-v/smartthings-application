@@ -2,7 +2,7 @@ package com.example.smartthings.common
 
 /**What the train car resources send when you ask for enriched information about cars.
  * Contains all basic car information, plus details about the car's location.*/
-class EnrichedTrainCar (
+data class EnrichedTrainCar (
 	/**Non-null: cars should have IDs by the time an enriched resource sees them.*/
 	val id: Long,
 	val code: String,
