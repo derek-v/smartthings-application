@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: location
+  labels:
+    app: location
+spec:
+  containers:
+    - name: location
+      image: location
+      imagePullPolicy: Never # image is build locally; don't take one from Docker Hub
+      ports:
+        - containerPort: 8081

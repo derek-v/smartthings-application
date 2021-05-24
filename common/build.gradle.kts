@@ -1,13 +1,17 @@
 plugins {
-	//Plugin versions are left out because other projects use this as a library, and gradle won't allow the library to set plugin versions.
-	//This restriction means this project can't function on its own, only when used by another project.
+	// Plugin versions are left out because other projects use this as a library, and gradle won't allow the library to set plugin versions.
+	// This restriction means this project can't function on its own, only when used by another project.
+	// This file includes some Spring dependencies because we have a bit of Spring util code in this project.
+	// Information on how to get Spring working in a multi-project build: stackoverflow.com/a/54136970
 
 	id("org.jetbrains.kotlin.jvm")
-
-	//Note: Spring is only used in some util code; the actual APIs are in other projects.
 	id("io.spring.dependency-management")
-	id("org.jetbrains.kotlin.plugin.spring")
-	id("org.springframework.boot")
+}
+
+dependencyManagement {
+	imports {
+		mavenBom(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES)
+	}
 }
 
 group = "com.example"
@@ -22,6 +26,7 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 
+	//spring is used in some util code
 	implementation("org.springframework.boot:spring-boot-starter-web")
 
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
