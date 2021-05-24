@@ -11,7 +11,7 @@ data class EnrichedTrainCar (
 	val location: RailLocation?,
 ) {
 	/**Builds an enriched view from other objects. The car must have an ID.*/
-	constructor(car: TrainCar, location: RailLocation?) : this(car.id!!, car.code, car.type, car.massKg, location) {
+	constructor(car: TrainCar, location: RailLocation?) : this(car.id, car.code, car.type, car.massKg, location) {
 		if(car.locationId != location?.id)
 			throw IllegalArgumentException("Mismatched location IDs: ${car.locationId} vs ${location?.id}")
 	}
