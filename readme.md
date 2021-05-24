@@ -197,5 +197,5 @@ Trying again usually fixes the problem.
   
 * Sometimes gradle is unable to compile the "common" project while either of the services is running.
 Stopping the location and/or train car service should fix the issue.
-You may want to run `./gradlew compileKotlin commpileTestKotlin` in all 3 non-library projects
+You may want to run `./gradlew compileKotlin compileTestKotlin` in all 3 non-library projects
 (location, traincar, test) before you run any services or tests.
