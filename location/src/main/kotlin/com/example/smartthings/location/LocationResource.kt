@@ -1,22 +1,37 @@
 package com.example.smartthings.location
 
+import com.example.smartthings.common.RailLocationNoId
 import com.example.smartthings.common.asResponse
+import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.ResponseBody
+import org.springframework.web.bind.annotation.*
 
 @Controller
 @RequestMapping("locations")
 class LocationResource {
 	@GetMapping
 	@ResponseBody
-	fun getAll() = LocationService.getAll()
+	fun getAll() = locationRepo.getAll()
+
+	@PostMapping
+	@ResponseBody
+	fun create(@RequestBody location: RailLocationNoId) = locationRepo.create(location)
 
 	@GetMapping("id/{id}")
-	fun getById(@PathVariable id: Long) = LocationService.getById(id).asResponse()
+	fun getById(@PathVariable id: Long) = locationRepo.getById(id).asResponse()
+
+	@DeleteMapping("id/{id}")
+	fun deleteById(@PathVariable id: Long): ResponseEntity<*> {
+		locationRepo.deleteById(id)
+		return ResponseEntity.ok(null)
+	}
 
 	@GetMapping("{code}")
-	fun getByCode(@PathVariable code: String) = LocationService.getByCode(code.uppercase()).asResponse()
+	fun getByCode(@PathVariable code: String) = locationRepo.getByCode(code.uppercase()).asResponse()
+
+	@DeleteMapping("{code}")
+	fun deleteByCode(@PathVariable code: String): ResponseEntity<*> {
+		locationRepo.deleteByCode(code)
+		return ResponseEntity.ok(null)
+	}
 }

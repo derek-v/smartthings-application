@@ -14,7 +14,7 @@ dependencyManagement {
 	}
 }
 
-group = "com.example"
+group = "com.example.smartthings"
 version = "1.0-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
 

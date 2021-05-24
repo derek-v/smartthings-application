@@ -44,6 +44,12 @@ fun <T> T?.asResponse(): ResponseEntity<T> {
 	return ResponseEntity.ok(this)
 }
 
+/**Throws an exception if the response code is not 200 (ok).*/
+fun requireSuccess(response: CloseableHttpResponse) {
+	if(response.code != 200)
+		throw java.lang.RuntimeException("${response.code}: ${EntityUtils.toString(response.entity)}")
+}
+
 /**Inspects the response code. Returns null for a 404. For a 200, tries to parse the response body as the provided type.
  * Throws an exception for any other response code, or if the response body cannot be parsed as this type.*/
 inline fun <reified T> CloseableHttpResponse.parseAndClose() : T? {

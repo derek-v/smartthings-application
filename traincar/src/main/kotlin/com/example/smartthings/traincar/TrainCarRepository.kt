@@ -42,7 +42,7 @@ object TrainCarRepository {
 
 	fun getById(id: Long): TrainCar? {
 		val out = byId[id]
-		log.debug("For ID {}, found {.}", id, out)
+		log.debug("For ID {}, found {}.", id, out)
 		return out
 	}
 

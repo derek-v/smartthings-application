@@ -1,8 +1,6 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-	//plugin versions are specified in common
-
 	id("org.jetbrains.kotlin.jvm") version "1.5.0"
 
 	id("io.spring.dependency-management") version "1.0.11.RELEASE"
@@ -10,7 +8,7 @@ plugins {
 	id("org.springframework.boot") version "2.5.0"
 }
 
-group = "com.example"
+group = "com.example.smartthings"
 version = "1.0-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
 

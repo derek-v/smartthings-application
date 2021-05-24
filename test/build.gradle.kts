@@ -1,8 +1,7 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
 	id("org.jetbrains.kotlin.jvm") version "1.5.0"
 
+	//This project doesn't really use Spring, but common does so we're stuck including it.
 	id("io.spring.dependency-management") version "1.0.11.RELEASE"
 	id("org.jetbrains.kotlin.plugin.spring") version "1.5.0"
 	id("org.springframework.boot") version "2.5.0"
@@ -27,16 +26,4 @@ dependencies {
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
 	testImplementation("junit:junit:4.12")
-}
-
-springBoot {
-	mainClassName = "com.example.smartthings.location.LocationSpringAppKt"
-}
-
-
-tasks.withType<KotlinCompile> {
-	kotlinOptions {
-		freeCompilerArgs = listOf("-Xjsr305=strict")
-		jvmTarget = "11"
-	}
 }

@@ -8,5 +8,6 @@ class LocationSpringApp
 
 
 fun main(args: Array<String>) {
+	locationRepo = InMemoryLocationRepository
 	SpringApplication.run(LocationSpringApp::class.java, *args)
 }
