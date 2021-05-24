@@ -192,4 +192,10 @@ Figuring out how to send a valid body to the PUT/POST APIs may take some digging
 * If some train car(s) have the IDs of locations that don't exist, errors will be thrown.
 I've decided this isn't a valid use case :)
   
-* Occasionally a gradle build runs into weird ClassNotFound issues. Trying again usually fixes the problem.
+* Occasionally a gradle build runs into weird issues, such as ClassNotFound errors.
+Trying again usually fixes the problem.
+  
+* Sometimes gradle is unable to compile the "common" project while either of the services is running.
+Stopping the location and/or train car service should fix the issue.
+You may want to run `./gradlew compileKotlin commpileTestKotlin` in all 3 non-library projects
+(location, traincar, test) before you run any services or tests.
