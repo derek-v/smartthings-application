@@ -24,6 +24,7 @@ class DemoDataCreator {
 		val locations = ArrayList<RailLocation>()
 
 		LocationClient().use { client ->
+			client.deleteAllExistingLocations()
 			val toCreate = listOf(
 				RailLocationNoId("DWV", "Dilworth Vehicle Facility"),
 				RailLocationNoId("HMV", "Humboldt Yard"),
@@ -37,6 +38,7 @@ class DemoDataCreator {
 		val rand = Random(1)
 
 		TrainCarClient().use { client ->
+			client.deleteAllExistingCars()
 			val prefixes = arrayOf("DME", "MCTA", "MDW", "MDWU", "MDWZ", "MMMX", "MNCX", "MNN", "MNNR", "MPLI", "MSLC", "MSWY", "MTFR", "SMDU")
 			for(i in 0 until 12) {
 
